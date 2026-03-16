@@ -30,24 +30,35 @@ func main() {
 		"eitan": {},
 		"saar":  {},
 	}
-	for key := range students {
-		for range 2 {
-			fmt.Println("enter a new grade for:", key)
+	choice := 0
+outer:
+	for {
+		fmt.Println("Choose an option:")
+		fmt.Println("1. Add a grade to a student")
+		fmt.Println("2. Print grade avg of a student")
+		fmt.Println("3. Print overall avg grade of all students")
+		fmt.Println("4. Exit the program")
+		student_name := ""
+		fmt.Scan(&choice)
+		switch choice {
+		case 1:
+			fmt.Println("enter a student name")
+			fmt.Scan(&student_name)
 			grade := 0
+			fmt.Println("enter grade")
 			fmt.Scan(&grade)
-			fmt.Println("entered grade:", grade)
-			addGrade(students, key, grade)
+			addGrade(students, student_name, grade)
+		case 2:
+			fmt.Println("enter a student name:")
+			fmt.Scan(&student_name)
+			avg := studentAverage(students, student_name)
+			fmt.Println(student_name, "s avergae", avg)
+		case 3:
+			all_student_avg := overallAverage(students)
+			fmt.Println("overall avergae", all_student_avg)
+		case 4:
+			break outer
 		}
-		fmt.Println("all of", key, "'s grades are:", students[key])
 	}
-
-	name := ""
-	fmt.Println("enter a student name:")
-	fmt.Scan(&name)
-	avg := studentAverage(students, name)
-	fmt.Println(name, "s avergae", avg)
-
-	all_student_avg := overallAverage(students)
-	fmt.Println("overall avergae", all_student_avg)
 
 }
