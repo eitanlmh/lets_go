@@ -8,10 +8,10 @@ import (
 )
 
 func worker(id int, wg *sync.WaitGroup) {
+	defer wg.Done()
 	fmt.Println("worker", id, "started")
 	time.Sleep(time.Millisecond * time.Duration(rand.IntN(2000-500)+500))
 	fmt.Println("worker", id, "done")
-	wg.Done()
 }
 func main() {
 	var wg sync.WaitGroup
